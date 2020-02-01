@@ -1,0 +1,15 @@
+<div class="actionButtons" *ngIf="gameStarted">
+  <div class = "button" [ngClass]="{'button-active' : selectedIndex == 1  }" (click)="updateSelection(1)">
+    <p>LEFT</p>
+  </div>
+  <div class = "button" [ngClass]="{'button-active' : selectedIndex == 2  }" (click)="updateSelection(2)">
+    <p>RIGHT</p>
+  </div>
+  <div class = "button" [ngClass]="{'button-active' : selectedIndex == 3  }" (click)="updateSelection(3)">
+    <p>DOWN</p>
+  </div>
+  <div class = "button" [ngClass]="{'button-active' : selectedIndex == 4  }" (click)="updateSelection(4)">
+    <p>UP</p>
+
+  </div>
+</div>
