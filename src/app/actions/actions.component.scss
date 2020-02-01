@@ -1,0 +1,18 @@
+div.actionButtons {
+  height: auto;
+  text-align: center;
+
+}
+
+.button {
+  margin: 10px;
+  padding: 5px;
+  display: inline-block;
+  width: 80px;
+  background-color: rgba(192, 192, 192, 0.541);
+}
+
+.button-active {
+background-color: rgb(189, 95, 18);
+color: black;
+}
