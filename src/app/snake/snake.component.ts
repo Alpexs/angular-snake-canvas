@@ -56,11 +56,16 @@ export class SnakeComponent implements OnInit {
 
   }
   addSnake() {
-    const w = this.snakes[0].w;
-    const h = this.snakes[0].h;
+    let w = this.snakes[0].w;
+    let h = this.snakes[0].h;
     const posX = this.snakes[0].x;
     const posY = this.snakes[0].y;
     const direction = this.snakes[0].currentDirection;
+    if (!this.snakes[0].rotated) {
+      w += 10;
+    } else {
+      h += 10;
+    }
     const square = new Snake(this.ctx, posX, posY, h, w, direction, this.gameService);
     this.snakes.splice(0, 0, square);
     square.draw();
