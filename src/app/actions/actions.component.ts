@@ -16,11 +16,11 @@ export class ActionsComponent implements OnInit {
 
   ngOnInit() {
     this.gameService.selectedState.subscribe(state => {
-      if (state === GameState.Ended || state === GameState.New) {
+      if (state === GameState.Ended || state === GameState.New) {
         this.selectedIndex = -1;
         this.gameService.selectedDirection.next(GameDirection.Right);
         this.gameStarted = false;
-      } else {
+      } else {
         this.selectedIndex = 2;
         this.gameStarted = true;
       }

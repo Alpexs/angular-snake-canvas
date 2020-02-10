@@ -3,6 +3,7 @@ import { GameService } from '../game.service';
 import { GameDirection } from '../GameDirection';
 import { GameState } from '../GameState';
 import {Snake} from './../Snake';
+import { retry } from 'rxjs/operators';
 
 @Component({
   selector: 'app-snake',
@@ -11,10 +12,12 @@ import {Snake} from './../Snake';
 })
 export class SnakeComponent implements OnInit {
 
+  score;
+  state;
   currentDirection = GameDirection.Right;
   snakes: Snake[] = [];
 
-  constructor(private gameService: GameService, private ngZone: NgZone) { }
+  constructor(private gameService: GameService, private ngZone: NgZone) {this.score = 0 }
   @ViewChild('canvas', { static: true })
   canvas: ElementRef<HTMLCanvasElement>;
   private ctx: CanvasRenderingContext2D;
@@ -23,6 +26,7 @@ export class SnakeComponent implements OnInit {
   ngOnInit(): void {
     this.ctx = this.canvas.nativeElement.getContext('2d');
     this.gameService.selectedState.subscribe(state => {
+      this.state = state;
       if (state === GameState.Started) {
         this.newGame();
         this.currentDirection = GameDirection.Right;
@@ -39,6 +43,10 @@ export class SnakeComponent implements OnInit {
     });
   }
 
+  shouldShowScore(state: GameState): boolean {
+    return this.state === state;
+  }
+
   newGame() {
     this.setSnake();
     this.ngZone.runOutsideAngular(() => this.tick());
@@ -47,6 +55,7 @@ export class SnakeComponent implements OnInit {
     }, 20);
   }
   setSnake() {
+    this.score = 0;
     const posX = this.ctx.canvas.width / 2 - 20;
     const posY = this.ctx.canvas.height / 2 - 20;
     const square = new Snake(this.ctx, posX, posY, 10, 20, GameDirection.Right, this.gameService);
@@ -56,6 +65,7 @@ export class SnakeComponent implements OnInit {
 
   }
   addSnake() {
+    this.score += 5 * this.snakes.length;
     let w = this.snakes[0].w;
     let h = this.snakes[0].h;
     const posX = this.snakes[0].x;

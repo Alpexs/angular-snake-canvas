@@ -7,11 +7,12 @@ import { GameDirection } from './GameDirection';
   providedIn: 'root'
 })
 export class GameService {
+  public score = 0;
   public selectedState: Subject<GameState> = new BehaviorSubject<GameState>(null);
   public selectedDirection: Subject<GameDirection> = new BehaviorSubject<GameDirection>(GameDirection.None);
   constructor() {
     this.selectedState.next(GameState.New);
-   }
+  }
 
   setState(state: GameState) {
     this.selectedState.next(state);

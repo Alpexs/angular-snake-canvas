@@ -13,8 +13,8 @@ export class TimerComponent implements OnInit {
   headerText = 'Click to start a game';
   currentState;
   time;
-  constructor(private gameService: GameService ) {
-   }
+  constructor(private gameService: GameService) {
+  }
 
 
   ngOnInit() {
@@ -33,7 +33,7 @@ export class TimerComponent implements OnInit {
   setupTimer() {
     const maxTimer = 15;
     this.time = timer(0, 1000).pipe(take(maxTimer + 1)).subscribe(ec => {
-      if ( ec === maxTimer || this.currentState === GameState.Ended ) {
+      if (ec === maxTimer || this.currentState === GameState.Ended) {
         this.timeOver();
         this.gameService.setState(GameState.Ended);
         return;
@@ -42,6 +42,6 @@ export class TimerComponent implements OnInit {
     });
   }
   timeOver() {
-    this.headerText = 'Game over, score 0, click to restart';
+    this.headerText = 'Game over, click to restart';
   }
 }

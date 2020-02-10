@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {GameState} from './../GameState';
+import { GameState } from './../GameState';
 import { GameService } from '../game.service';
 @Component({
   selector: 'app-board',
@@ -11,13 +11,13 @@ export class BoardComponent implements OnInit {
   inPause: boolean;
   gameStarted: boolean;
   currentTimer = 0;
-  constructor(private gameService: GameService) {}
+  constructor(private gameService: GameService) { }
 
   ngOnInit() {
-   // tslint:disable-next-line: deprecation
-   this.gameService.selectedState.subscribe ( state => {
-     this.updateState(state);
-   });
+    // tslint:disable-next-line: deprecation
+    this.gameService.selectedState.subscribe(state => {
+      this.updateState(state);
+    });
   }
 
   updateState(state: GameState) {
