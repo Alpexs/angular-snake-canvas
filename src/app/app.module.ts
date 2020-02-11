@@ -10,6 +10,16 @@ import { SnakeComponent } from './snake/snake.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { HomeComponent } from './home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Routes, RouterModule } from '@angular/router';
+
+const appRoutes: Routes = [
+  { path: 'register', component: HomeComponent },
+  { path: 'leaderboard',      component: LeaderboardComponent },
+  { path: '',
+    redirectTo: '/app-home',
+    pathMatch: 'full'
+  }
+];
 
 @NgModule({
   declarations: [
@@ -24,7 +34,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]
