@@ -1,0 +1,49 @@
+
+.leaderboard {
+  margin: 0 auto;
+  right: 0px;
+}
+.players {
+  list-style-type: none;
+  margin-top: 20px;
+  line-height: 1em;
+
+  .player-ranking {
+    display: inline-table;
+    width: -webkit-fill-available;
+  }
+
+  li .score {
+    align-content: center;
+    display: grid;
+    width: 55px;
+    margin-left: 10px;
+    color: white;
+    text-align: center;
+    background-color: yellowgreen;
+  }
+
+  li .name {
+    color: #607D8B;
+    margin-left: 15px;
+    background-color: #DDD;
+  }
+  li {
+    color: #607D8B;
+    background-color: #DDD;
+    display: inline-flex;
+  }
+  .badge {
+    display: inline-block;
+    font-size: small;
+    color: white;
+    padding: 0.8em 0.7em 0 0.7em;
+    background-color:#405061;
+    line-height: 1em;
+    left: -1px;
+    height: 1.8em;
+    width: 30px;
+    text-align: center;
+    margin-right: .8em;
+  }
+}

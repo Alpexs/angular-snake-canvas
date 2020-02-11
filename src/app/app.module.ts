@@ -7,6 +7,9 @@ import { BoardComponent } from './board/board.component';
 import { TimerComponent } from './timer/timer.component';
 import { ActionsComponent } from './actions/actions.component';
 import { SnakeComponent } from './snake/snake.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { HomeComponent } from './home/home.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,11 +17,14 @@ import { SnakeComponent } from './snake/snake.component';
     BoardComponent,
     TimerComponent,
     ActionsComponent,
-    SnakeComponent
+    SnakeComponent,
+    LeaderboardComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

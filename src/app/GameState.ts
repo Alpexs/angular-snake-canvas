@@ -1,5 +1,6 @@
 
 export enum GameState {
+  Register,
   New,
   Started,
   Pause,

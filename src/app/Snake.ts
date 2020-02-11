@@ -6,21 +6,14 @@ import { Candy } from './Candy';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 export class Snake implements OnInit {
-  constructor(private ctx: CanvasRenderingContext2D,
-    posX: number,
-    posY: number,
-    h: number,
-    w: number,
-    currentDirection:
-      GameDirection,
-    private gameService: GameService) {
+  constructor(private ctx: CanvasRenderingContext2D, posX: number, posY: number, h: number, w: number, currentDirection: GameDirection,
+              private gameService: GameService) {
     this.x = posX;
     this.y = posY;
     this.h = h;
     this.w = w;
     this.generateCandy(ctx);
     this.currentDirection = currentDirection;
-
   }
   private color = 'red';
   x = 0;

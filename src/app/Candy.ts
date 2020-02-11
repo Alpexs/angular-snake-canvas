@@ -3,7 +3,7 @@ export class Candy {
   y = 0;
   w = 10;
   h = 10;
-  color = 'green';
+  color = 'blue';
   eated = false;
 
   constructor(private ctx: CanvasRenderingContext2D) { }

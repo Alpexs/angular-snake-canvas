@@ -17,7 +17,7 @@ export class SnakeComponent implements OnInit {
   currentDirection = GameDirection.Right;
   snakes: Snake[] = [];
 
-  constructor(private gameService: GameService, private ngZone: NgZone) {this.score = 0 }
+  constructor(private gameService: GameService, private ngZone: NgZone) {this.score = 0; }
   @ViewChild('canvas', { static: true })
   canvas: ElementRef<HTMLCanvasElement>;
   private ctx: CanvasRenderingContext2D;
@@ -36,6 +36,7 @@ export class SnakeComponent implements OnInit {
         cancelAnimationFrame(this.requestId);
         this.ctx.clearRect(0, 0 , this.ctx.canvas.width, this.ctx.canvas.height);
         this.snakes = [];
+        this.gameService.updateCurrentPlayerScore(this.score);
       }
     });
     this.gameService.selectedDirection.subscribe(direction => {

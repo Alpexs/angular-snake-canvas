@@ -1,0 +1,17 @@
+<div [formGroup]="playerForm">
+  <h3>New Player</h3>
+
+  <label>
+    username:
+    <input type="text" maxlength="10" formControlName="username" />
+  </label>
+
+  <label>
+    Age:
+    <input type="number" min="0" formControlName="age" />
+  </label>
+
+  <button type="submit" [disabled]="!playerForm.valid" (click)="addPlayer()">
+    Submit
+  </button>
+</div>

@@ -1,5 +1,8 @@
-<h1>Snake revolved</h1>
-<div>
+<div *ngIf="!canPlay">
+  <app-home-registration></app-home-registration>
+  <app-leaderboard></app-leaderboard>
+</div>
+<div *ngIf="canPlay">
   <app-board></app-board>
-  <app-actions></app-actions>
+  <app-leaderboard></app-leaderboard>
 </div>

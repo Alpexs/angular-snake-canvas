@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { GameState } from './../GameState';
+import { GameState } from '../GameState';
 import { GameService } from '../game.service';
+import { Player } from '../player';
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
@@ -8,10 +9,17 @@ import { GameService } from '../game.service';
 })
 export class BoardComponent implements OnInit {
   state: GameState;
+  currentPlayer: Player;
   inPause: boolean;
   gameStarted: boolean;
   currentTimer = 0;
-  constructor(private gameService: GameService) { }
+  constructor(private gameService: GameService) {
+    if (gameService.getMyProfile()) {
+      this.currentPlayer = gameService.getMyProfile();
+    } else {
+      this.updateState(GameState.Register);
+    }
+  }
 
   ngOnInit() {
     // tslint:disable-next-line: deprecation
