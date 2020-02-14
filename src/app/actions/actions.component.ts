@@ -17,7 +17,7 @@ export class ActionsComponent implements OnInit {
   ngOnInit() {
     this.gameService.selectedDirection.subscribe(direction => {
       this.selectedIndex = direction;
-    })
+    });
     this.gameService.selectedState.subscribe(state => {
       if (state === GameState.Ended || state === GameState.New || state === GameState.Register) {
         this.selectedIndex = -1;

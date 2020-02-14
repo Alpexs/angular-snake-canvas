@@ -1,13 +1,13 @@
-<div class="leaderboard"  *ngIf="players" >
+<div class="leaderboard" *ngIf="players">
   <h2>Leaderboard</h2>
-<ul class="players">
-<li *ngFor="let player of players | slice:0:10; let ind = index ">
-  <div class="player-ranking">
-   <span class="badge">{{ind+1}}</span>
-   <span class="name">{{player.name}}</span>
-  </div>
-  <span class="score">{{player.score}}</span>
+  <ul class="players">
+    <li *ngFor="let player of players | slice: 0:10; let ind = index">
+      <span class="badge">{{ ind + 1 }}</span>
+      <div class="player-ranking">
+        <span class="name">{{ player.name }}</span>
+      </div>
 
-</li>
-</ul>
+      <span class="score">{{ player.score }}</span>
+    </li>
+  </ul>
 </div>

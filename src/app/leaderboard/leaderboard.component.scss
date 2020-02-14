@@ -9,14 +9,15 @@
   display: inline-grid;
 
   .player-ranking {
-    display: inline-table;
-    width: -webkit-fill-available;
+    width: 100%;
+    text-align: center;
   }
 
   li .score {
     align-content: center;
     display: grid;
-    width: 50px;
+    width: 100px;
+    height: 100%;
     color: white;
     text-align: center;
     background-color: yellowgreen;
@@ -24,12 +25,16 @@
 
   li .name {
     color: #607D8B;
+    widows: 150px;
+    text-align: center;
     background-color: #DDD;
   }
   li {
     color: #607D8B;
     background-color: #DDD;
     display: inline-flex;
+    height: 100%;
+    align-items: center;
   }
   .badge {
     display: inline-block;
@@ -40,7 +45,7 @@
     line-height: 1em;
     left: -1px;
     height: 1.8em;
-    width: 30px;
+    width: 50px;
     text-align: center;
     margin-right: .8em;
   }

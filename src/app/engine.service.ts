@@ -27,7 +27,7 @@ export class EngineService implements OnDestroy {
   private composer: EffectComposer;
   private currentDirection;
   private frameId: number = null;
-  private score = 0;
+  private score = 1;
   private snakeSize;
   //   private $on = document.addEventListener.bind(document);
   //   private xmouse
@@ -46,10 +46,16 @@ export class EngineService implements OnDestroy {
     if (this.frameId != null) {
       cancelAnimationFrame(this.frameId);
     }
+
+  }
+
+  clearGame() {
+    if (this.frameId != null) {
+      cancelAnimationFrame(this.frameId);
+    }
     this.scene.remove.apply(this.scene, this.scene.children);
-    this.setGameElements();
     this.gameService.setScore(this.score);
-    this.score = 0;
+    this.score = 1;
   }
 
   handleGameEvents() {
@@ -108,20 +114,24 @@ export class EngineService implements OnDestroy {
     this.composer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.snakeSize = new THREE.Box3();
-    this.setGameElements();
   }
 
   setGameElements() {
+    this.score = 0;
+    this.clearGame();
+    this.composer.reset();
     this.camera.position.set(0, 0, 75);
     this.scene.add(this.light);
     this.camera.add(this.pointLight);
     this.scene.add(this.camera);
     this.snake.position.set(0, 0, 0);
     this.snake.scale.setX(1);
+    this.snake.visible = true;
     this.generateCandyPosition();
     this.scene.add(this.snake);
     this.scene.add(this.candy);
     this.snakeSize.setFromObject(this.snake);
+    this.animate();
   }
 
   public animate(): void {
@@ -172,6 +182,7 @@ export class EngineService implements OnDestroy {
     this.frameId = requestAnimationFrame(() => {
       this.render();
     });
+    this.renderer.clear();
     this.composer.render();
     // this.renderer.render(this.scene,this.camera)
     if (this.currentDirection) {
@@ -180,7 +191,7 @@ export class EngineService implements OnDestroy {
 
 
     if (this.detectCollisionCubes(this.snake, this.candy)) {
-      this.gameService.setScore(this.score += 11);
+      this.gameService.setScore(this.score *= 4);
       this.generateCandyPosition();
       this.snake.scale.x += 0.3;
       this.snake.translateY(0.3 / 2);
@@ -275,10 +286,10 @@ export class EngineService implements OnDestroy {
         this.snake.position.setX(this.snake.position.x + 0.4);
         break;
       case GameDirection.Up:
-        this.snake.position.setY(this.snake.position.y + 0.2);
+        this.snake.position.setY(this.snake.position.y + 0.4);
         break;
       case GameDirection.Down:
-        this.snake.position.setY(this.snake.position.y - 0.2);
+        this.snake.position.setY(this.snake.position.y - 0.4);
         break;
       default:
         break;
@@ -295,9 +306,11 @@ export class EngineService implements OnDestroy {
         const xMid = - 0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
         geometry.translate(xMid, 0, 0);
         const text = new THREE.Mesh(geometry, matDark);
+        this.clearGame();
         this.scene.add(text);
-        this.composer.render();
+        this.snake.visible = false;
         this.gameService.setState(GameState.Ended);
+        this.composer.render();
       });
 
     }
@@ -335,8 +348,6 @@ export class EngineService implements OnDestroy {
       this.renderer.setSize(width, height, false);
       this.camera.aspect = width / height;
       this.camera.updateProjectionMatrix();
-
-      // set render target sizes here
     }
   }
 }

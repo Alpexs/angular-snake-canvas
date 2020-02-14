@@ -1,8 +1,10 @@
-<div *ngIf="canPlay">
+<div class="navBar">
   <nav>
   <a routerLink="/register" routerLinkActive="active">Create new Player</a>
+  <a routerLink="/play" routerLinkActive="active" *ngIf="canPlay">Play</a>
+  <a routerLink="/leaderboard" routerLinkActive="active" >Leaderboard</a>
 </nav>
-  <app-board></app-board>
-  <app-leaderboard></app-leaderboard>
+  <!-- <app-board></app-board>
+  <app-leaderboard></app-leaderboard> -->
 </div>
 <router-outlet></router-outlet>

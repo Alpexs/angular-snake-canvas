@@ -8,10 +8,10 @@ div.actionButtons {
   padding: 5px;
   display: inline-block;
   width: 80px;
-  background-color: rgba(192, 192, 192, 0.541);
+  background: linear-gradient(135deg, orange, orange 60%, cyan);
 }
 
 .button-active {
-  background-color: rgb(189, 95, 18);
+  background: rgb(189, 95, 18);
   color: black;
 }

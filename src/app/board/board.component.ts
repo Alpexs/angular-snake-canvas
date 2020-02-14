@@ -13,6 +13,7 @@ export class BoardComponent implements OnInit {
   inPause: boolean;
   gameStarted: boolean;
   currentTimer = 0;
+  audio;
   constructor(private gameService: GameService) {
     if (gameService.getMyProfile()) {
       this.currentPlayer = gameService.getMyProfile();
@@ -27,6 +28,17 @@ export class BoardComponent implements OnInit {
       this.updateState(state);
     });
   }
+  playSound() {
+    this.audio = new Audio();
+    this.audio.src = '../../assets/introfamenor.mp3';
+    this.audio.load();
+    this.audio.play();
+    }
+
+    stopSound() {
+      this.audio.pause();
+      this.audio.currentTimer = 0;
+    }
 
   updateState(state: GameState) {
     this.state = state;
@@ -42,8 +54,10 @@ export class BoardComponent implements OnInit {
     switch (this.state) {
       case GameState.New:
         this.startGame();
+        this.playSound();
         break;
       case GameState.Ended:
+        this.stopSound();
         this.gameService.setState(GameState.New);
         break;
       default:

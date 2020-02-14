@@ -14,9 +14,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 const appRoutes: Routes = [
   { path: 'register', component: HomeComponent },
+  { path: 'play',      component: BoardComponent },
   { path: 'leaderboard',      component: LeaderboardComponent },
   { path: '',
-    redirectTo: '/app-home',
+    redirectTo: '/register',
     pathMatch: 'full'
   }
 ];

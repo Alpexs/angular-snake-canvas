@@ -10,7 +10,7 @@ import { take, max } from 'rxjs/operators';
   styleUrls: ['./timer.component.scss']
 })
 export class TimerComponent implements OnInit {
-  headerText = 'Click to start a game';
+  headerText = '';
   currentState;
   time;
   constructor(private gameService: GameService) {
@@ -20,28 +20,16 @@ export class TimerComponent implements OnInit {
   ngOnInit() {
     this.gameService.selectedState.subscribe(state => {
       this.currentState = state;
-      if (state === GameState.Started) {
-        this.setupTimer();
+      if (state === GameState.Started || state === GameState.New) {
+        this.headerText = 'click to restart';
+
       }
       if (state === GameState.Ended) {
         this.timeOver();
-        this.time.unsubscribe();
       }
-    });
-  }
-
-  setupTimer() {
-    const maxTimer = 15;
-    this.time = timer(0, 1000).pipe(take(maxTimer + 1)).subscribe(ec => {
-      if (ec === maxTimer || this.currentState === GameState.Ended) {
-        this.timeOver();
-        this.gameService.setState(GameState.Ended);
-        return;
-      }
-      this.headerText = 'Time left: ' + (maxTimer - ec) + ' s';
     });
   }
   timeOver() {
-    this.headerText = 'Game over, click to restart';
+    this.headerText = 'click to restart';
   }
 }

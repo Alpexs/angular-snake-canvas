@@ -24,11 +24,11 @@ export class SnakeComponent implements OnInit {
     this.gameService.selectedState.subscribe(state => {
       this.state = state;
       if (state === GameState.Started) {
-        this.engineService.animate();
+        this.engineService.setGameElements();
         this.currentDirection = GameDirection.Right;
       }
       if (state === GameState.Ended) {
-        this.engineService.ngOnDestroy();
+        this.gameService.updateCurrentPlayerHighScore(this.score);
       }
     });
     this.gameService.selectedDirection.subscribe(direction => {

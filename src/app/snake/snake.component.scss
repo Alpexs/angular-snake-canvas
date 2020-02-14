@@ -8,3 +8,10 @@
   pointer-events: none;
   margin: 0 auto;
 }
+
+#rendererCanvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden
+}
