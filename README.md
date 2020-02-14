@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # AngularGameApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.23.
@@ -29,4 +28,3 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 =======
 # angular-snake-canvas
 Angular snake game using HTML5 Canvas
->>>>>>> 365881ecea04283250ba66adce29314d629a3988
