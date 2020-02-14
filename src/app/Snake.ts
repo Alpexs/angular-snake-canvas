@@ -3,7 +3,6 @@ import { GameService } from './game.service';
 import { GameState } from './GameState';
 import { OnInit } from '@angular/core';
 import { Candy } from './Candy';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 export class Snake implements OnInit {
   constructor(private ctx: CanvasRenderingContext2D, posX: number, posY: number, h: number, w: number, currentDirection: GameDirection,

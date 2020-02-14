@@ -4,6 +4,7 @@ import { GameDirection } from '../GameDirection';
 import { GameState } from '../GameState';
 import {Snake} from './../Snake';
 import { retry } from 'rxjs/operators';
+import { EngineService } from '../engine.service';
 
 @Component({
   selector: 'app-snake',
@@ -15,81 +16,30 @@ export class SnakeComponent implements OnInit {
   score;
   state;
   currentDirection = GameDirection.Right;
-  snakes: Snake[] = [];
-
-  constructor(private gameService: GameService, private ngZone: NgZone) {this.score = 0; }
-  @ViewChild('canvas', { static: true })
-  canvas: ElementRef<HTMLCanvasElement>;
-  private ctx: CanvasRenderingContext2D;
-  requestId;
-  interval;
+  constructor(private gameService: GameService, private ngZone: NgZone, private engineService: EngineService) {}
+  @ViewChild('rendererCanvas', {static: true})
+  public rendererCanvas: ElementRef<HTMLCanvasElement>;
   ngOnInit(): void {
-    this.ctx = this.canvas.nativeElement.getContext('2d');
+    this.engineService.createScene(this.rendererCanvas);
     this.gameService.selectedState.subscribe(state => {
       this.state = state;
       if (state === GameState.Started) {
-        this.newGame();
+        this.engineService.animate();
         this.currentDirection = GameDirection.Right;
       }
       if (state === GameState.Ended) {
-        clearInterval(this.interval);
-        cancelAnimationFrame(this.requestId);
-        this.ctx.clearRect(0, 0 , this.ctx.canvas.width, this.ctx.canvas.height);
-        this.snakes = [];
-        this.gameService.updateCurrentPlayerScore(this.score);
+        this.engineService.ngOnDestroy();
       }
     });
     this.gameService.selectedDirection.subscribe(direction => {
       this.currentDirection = direction;
     });
+    this.gameService.score.subscribe(score => {
+      this.score = score;
+    });
   }
 
   shouldShowScore(state: GameState): boolean {
     return this.state === state;
-  }
-
-  newGame() {
-    this.setSnake();
-    this.ngZone.runOutsideAngular(() => this.tick());
-    this.interval = setInterval(() => {
-      this.tick();
-    }, 20);
-  }
-  setSnake() {
-    this.score = 0;
-    const posX = this.ctx.canvas.width / 2 - 20;
-    const posY = this.ctx.canvas.height / 2 - 20;
-    const square = new Snake(this.ctx, posX, posY, 10, 20, GameDirection.Right, this.gameService);
-    this.ctx.clearRect(0, 0 , this.ctx.canvas.width, this.ctx.canvas.height);
-    square.draw();
-    this.snakes = this.snakes.concat(square);
-
-  }
-  addSnake() {
-    this.score += 5 * this.snakes.length;
-    let w = this.snakes[0].w;
-    let h = this.snakes[0].h;
-    const posX = this.snakes[0].x;
-    const posY = this.snakes[0].y;
-    const direction = this.snakes[0].currentDirection;
-    if (!this.snakes[0].rotated) {
-      w += 10;
-    } else {
-      h += 10;
-    }
-    const square = new Snake(this.ctx, posX, posY, h, w, direction, this.gameService);
-    this.snakes.splice(0, 0, square);
-    square.draw();
-  }
-  tick() {
-    this.ctx.clearRect(0, 0 , this.ctx.canvas.width, this.ctx.canvas.height);
-    if (this.snakes[0].candy.eated) {
-      this.currentDirection = this.snakes[0].currentDirection;
-      this.addSnake();
-    }
-    this.snakes.forEach((square: Snake) => {
-      square.move(this.currentDirection);
-    });
-    this.requestId = requestAnimationFrame(() => this.tick);
   }
 }
