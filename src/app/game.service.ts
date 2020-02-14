@@ -8,7 +8,7 @@ import { Player } from './player';
   providedIn: 'root'
 })
 export class GameService {
-  public score = 0;
+  public score: Subject<number> = new BehaviorSubject<number>(0);
   players: Player[] = [];
   private currentPlayer;
   public selectedState: Subject<GameState> = new BehaviorSubject<GameState>(null);
@@ -16,6 +16,10 @@ export class GameService {
   constructor() {
     this.selectedState.next(GameState.New);
     this.players = this.getPlayersSortedByRanking();
+  }
+
+  setScore(score: number) {
+    this.score.next(score);
   }
 
   setState(state: GameState) {
@@ -47,7 +51,7 @@ export class GameService {
     localStorage.setItem('myPlayer', JSON.stringify((null)));
   }
 
-  updateCurrentPlayerScore(score: number) {
+  updateCurrentPlayerHighScore(score: number) {
     if (this.currentPlayer.score > score) {
       return;
     }

@@ -1,8 +1,8 @@
-<div *ngIf="!canPlay">
-  <app-home-registration></app-home-registration>
-  <app-leaderboard></app-leaderboard>
-</div>
 <div *ngIf="canPlay">
+  <nav>
+  <a routerLink="/register" routerLinkActive="active">Create new Player</a>
+</nav>
   <app-board></app-board>
   <app-leaderboard></app-leaderboard>
 </div>
+<router-outlet></router-outlet>

@@ -1,12 +1,12 @@
 
 .leaderboard {
   margin: 0 auto;
-  right: 0px;
 }
 .players {
   list-style-type: none;
   margin-top: 20px;
   line-height: 1em;
+  display: inline-grid;
 
   .player-ranking {
     display: inline-table;
@@ -16,8 +16,7 @@
   li .score {
     align-content: center;
     display: grid;
-    width: 55px;
-    margin-left: 10px;
+    width: 50px;
     color: white;
     text-align: center;
     background-color: yellowgreen;
@@ -25,7 +24,6 @@
 
   li .name {
     color: #607D8B;
-    margin-left: 15px;
     background-color: #DDD;
   }
   li {

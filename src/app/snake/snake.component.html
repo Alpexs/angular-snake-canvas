@@ -1,5 +1,5 @@
 <h2 *ngIf="shouldShowScore"> Score: {{score}}</h2>
 <app-timer></app-timer>
-<canvas #canvas>
-</canvas>
-
+<div class="engine-wrapper">
+  <canvas #rendererCanvas id="renderCanvas" height="350" width="650" ></canvas>
+</div>

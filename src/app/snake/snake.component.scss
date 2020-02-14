@@ -1,6 +1,10 @@
-canvas {
-  border-style: solid;
-  margin-top: auto;
-  width: -webkit-fill-available;
-  background-color: rgb(9, 175, 92);
+// canvas {
+//   border-style: solid;
+//   margin-top: auto;
+//   background-color: rgb(9, 175, 92);
+// }
+
+.engine-wrapper {
+  pointer-events: none;
+  margin: 0 auto;
 }
